@@ -1,0 +1,337 @@
+/* ---------- OUTER WRAPPER ---------- */
+.section.grid-3 {
+  display: grid;
+  grid-template-columns: 1fr;
+  background: var(--bg-primary);
+  align-items: stretch;
+  padding-bottom: 72px;
+  padding-top: 0;
+  padding-inline: clamp(32px, 8vw, 128px);
+  gap: 36px 32px;
+}
+
+@media (width < 48em){
+  .section.grid-3{
+    column-gap: 1.50rem;
+  }
+
+  .section.grid-3 .sovm-card-content{
+    gap: 12px;
+  }
+
+ .section.grid-3 .sovm-cards-wrapper .sovm-card-content h3{
+    margin-bottom: 0;
+  }
+}
+
+.sovm-card {
+  display: flex;
+  flex-direction: column;
+  border-radius: 12px;
+  overflow: hidden;
+  height: 100%;
+}
+
+@media (width >= 48em){
+.section.grid-3 .sovm-card {
+  height: 100%;
+  padding: 0 0 1.5rem;
+}
+
+.section.grid-3{
+  padding-bottom: 116px;
+}
+}
+
+/* ---------- BASE WRAPPER ---------- */
+.sovm-cards-wrapper {
+  border-radius: 14px;
+  box-sizing: border-box;
+  height: 100%;
+}
+
+
+.lets-build-card .sovm-cards-wrapper {
+  max-height: 366px;
+}
+
+.section.grid-3 > .sovm-cards-wrapper {
+  width: 100%;
+  padding: 0 1px;
+}
+
+.section.grid-3 .sovm-cards {
+  background: var(--color-white);
+  border-radius: 14px;
+  height: 100%;
+}
+
+/* ---------- NO GRID ---------- */
+.sovm-cards-wrapper.no-grid {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+}
+
+
+/* ---------- IMAGE ---------- */
+.sovm-card.has-image {
+  flex-direction: column;
+}
+
+.sovm-card-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.sovm-card.has-image .sovm-card-image {
+  width: 100%;
+}
+
+.sovm-card.has-image .sovm-card-image img {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+/* ---------- LOGO IMAGE (GRID-3 ONLY) ---------- */
+.section.grid-3 .sovm-card-image.is-logo {
+  display: flex;
+  align-items: center;
+  padding: 3rem 2.25rem 0;
+}
+
+.section.grid-3 .sovm-card-image.is-logo img {
+  width: auto;
+  max-width: 100%;
+  max-height: 42px;
+  object-fit: contain;
+}
+
+@media (width < 48em){
+  .section.grid-3 .sovm-card-image.is-logo img{
+    height: 30px;
+  }
+}
+
+.sovm-card-image picture {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.section.grid-3 .sovm-card-image:not(.is-logo) picture {
+  display: block;
+  border-bottom: 1px solid var(--sovm-header);
+}
+
+/* ---------- CONTENT ---------- */
+.sovm-card-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.section.grid-3 .sovm-card-content {
+  padding-top: 1.75rem;
+  padding-bottom: 1.5rem;
+  padding-inline: 1.5rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.sovm-card.has-image .sovm-card-content {
+  width: 100%;
+  margin-top: 16px;
+}
+
+/* ---------- NO IMAGE ---------- */
+.sovm-card.no-image .sovm-card-image {
+  display: none;
+}
+
+.sovm-card.no-image .sovm-card-content {
+  width: 100%;
+}
+
+/* ---------- BACKGROUNDS ---------- */
+.sovm-cards-wrapper.card-white {
+  background: var(--bg-white-50);
+  border: 1px solid var(--background-color);
+  color: var(--bg-primary);
+}
+
+.sovm-cards-wrapper.card-darkgrey {
+  background: var(--bg-primary);
+  color: var(--color-white);
+}
+
+/* ---------- BUTTON ---------- */
+.sovm-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row-reverse;
+  gap: 0.625rem;
+  padding: 0.375rem 0.5rem 0.375rem 1rem;
+  border-radius: 14px;
+  border: 1px solid var(--bg-primary);
+  text-decoration: none;
+  margin-top: 31px;
+  font-size: 1rem;
+  line-height: 1.2;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.4s ease-out;
+  background: var(--color-brand-green);
+}
+
+.sovm-btn:hover {
+  background: var(--color-brand-green-25);
+  opacity: 0.9;
+  text-decoration: none;
+}
+
+.card-darkgrey .sovm-btn {
+  border-color: var(--nav-color);
+  color: var(--color-white);
+}
+
+.section.grid-3 .sovm-btn {
+  margin-top: auto;
+}
+
+.section.grid-3 .sovm-btn:hover{
+  border-color: var(--nav-color);
+  text-decoration: none;
+  transition: .4s ease-out;
+}
+
+.sovm-btn svg.icon {
+  display: inline-block;
+  fill: currentcolor;
+  border: 1px solid var(--bg-primary);
+  border-radius: 9px;
+  padding: 0.4063rem;
+  background: var(--light-color);
+  color: var(--bg-primary);
+  width: 0.9375rem;
+  height: 0.9375rem;
+}
+
+.sovm-btn span {
+  line-height: 27px;
+  font-weight: 500;
+  color: var(--bg-primary);
+}
+
+.sovm-cards-wrapper .sovm-card-content h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 1.687rem;
+  line-height: 1.25;
+  margin-top: 0;
+}
+
+.sovm-cards-wrapper .sovm-card-content p {
+  font-size: 1rem;
+  line-height: 1.47;
+  margin-top: 0;
+}
+
+.section.grid-3 .sovm-cards-wrapper .sovm-card-content h3 {
+  font-size: 1rem;
+  margin-top: 0;
+}
+
+.section.grid-3 .sovm-cards-wrapper .sovm-card-content p {
+  font-size: 1rem;
+  margin-bottom: 0;
+}
+
+/* ---------- RESPONSIVE GRID-3 ---------- */
+@media (width >= 48em) {
+  .section.grid-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .section.grid-3 .sovm-card-content {
+    padding: 2.5rem 2.25rem 2.25rem;
+  }
+
+  .sovm-cards-wrapper .sovm-card-content p {
+    font-size: 1.125rem;
+    line-height: 1.45;
+    margin: 0;
+  }
+
+  .section.grid-3 .sovm-cards-wrapper .sovm-card-content p {
+    font-size: 1.125rem;
+  }
+
+  .sovm-cards-wrapper .sovm-card-content h3 {
+    font-size: 2rem;
+    margin-bottom: 1.375rem;
+    margin-top: 0;
+  }
+
+  .section.grid-3 .sovm-cards-wrapper .sovm-card-content h3 {
+    font-size: 1.125rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .sovm-cards-wrapper.no-grid {
+    max-width: 475px;
+    padding: 3rem;
+  }
+
+  .sovm-cards-wrapper.no-grid:has(.sovm-btn) {
+    max-height: 470px;
+  }
+
+  .sovm-cards-wrapper.no-grid .sovm-btn {
+    margin-top: 3.5625rem;
+    max-width: 373px;
+  }
+}
+
+/* 3 - Card Layout */
+@media (width >= 62em) {
+  .section.grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .section.grid-3 .sovm-btn {
+    max-width: 304px;
+    font-size: 1.125rem;
+    min-height: 44px;
+    padding: 0.375rem 0.625rem 0.375rem 1.25rem;
+  }
+
+  .section.grid-3 .sovm-btn svg.icon {
+    padding: 0.625rem;
+  }
+}
+
+/* ---------- NO GRID ---------- */
+
+@media (width >= 36em) {
+  .sovm-cards-wrapper.no-grid {
+    max-width: 475px;
+  }
+}
+
+@media (width >= 62em) {
+  .sovm-cards-wrapper.no-grid .sovm-btn {
+    font-size: 1.125rem;
+    min-height: 58px;
+    padding: 0.375rem 0.625rem 0.375rem 1.25rem;
+  }
+
+  .sovm-cards-wrapper.no-grid .sovm-btn svg.icon {
+    padding: 0.625rem;
+  }
+}

@@ -1,0 +1,426 @@
+/* stylelint-disable alpha-value-notation */
+/* stylelint-disable no-descending-specificity */
+:root {
+    --body-font-size: 16px;
+    --bs-body-line-height: 1.5;
+    --bg-primary: #282b3a;
+    --bg-primary-rgb: 40, 43, 58;
+    --bg-secondary: #50ffc5;
+    --bg-secondary-rgb: 80, 255, 197;
+    --bg-opacity-primary: 1;
+    --bg-opacity-secondary: 0.5;
+    --link-hover-color: #1d3ecf;
+    --bs-gutter-x: 56px;
+    --teal-color: #a7ffe2;
+    --bg-image-grid: 207, 248, 253;
+    --bg-card-color: 255, 255, 255;
+    --bg-card-opacity-secondary: 0.25;
+    --bg-card-opacity-tertiary: 0.95;
+    --bg-white-50: rgb(255 255 255 / 25%);
+    --shadow-color: #000;
+    --border-color: #62ffcb;
+    --color-text-inverse: #fff;
+    --bs-body-color: #282b3a;
+    --color-black: #000;
+    --color-white: #fff;
+}
+
+body {
+    font-size: var(--body-font-size);
+    line-height: var(--bs-body-line-height);
+}
+
+main {
+    padding-top: var(--header-height);
+}
+
+body.theme-dark {
+    /* stylelint-disable-next-line color-function-alias-notation */
+    background: rgba(var(--bg-primary-rgb), var(--bg-opacity-primary));
+}
+
+/* START: Page-Level Background Colors */
+body.bg-primary,
+main.bg-primary {
+    /* stylelint-disable-next-line color-function-alias-notation */
+    background: rgba(var(--bg-primary-rgb), var(--bg-opacity-primary));
+    color: var(--color-text-inverse);
+}
+
+body.bg-secondary,
+main.bg-secondary {
+    /* stylelint-disable-next-line color-function-alias-notation */
+    background: rgba(var(--bg-secondary-rgb), var(--bg-opacity-secondary));
+}
+
+body.image-grid-color,
+main.image-grid-color {
+    /* stylelint-disable-next-line color-function-alias-notation */
+    background: rgba(var(--bg-image-grid), var(--bg-opacity-primary));
+}
+
+/* END: Page-Level Background Colors */
+
+/* START: Section Styles */
+
+/* Background Image Grid - supports desktop + mobile background images
+   Structure:
+   - Section content (z-index: 1)
+   - Second-to-last .default-content-wrapper = Mobile background (shown < 768px)
+   - Last .default-content-wrapper = Desktop background (shown >= 768px)
+*/
+.section.bg-image-grid {
+    position: relative;
+    overflow: hidden;
+    /* stylelint-disable-next-line color-function-alias-notation */
+    background: rgba(var(--bg-image-grid), var(--bg-opacity-primary));
+}
+
+/* Desktop background image - last default-content-wrapper */
+.section.bg-image-grid > .default-content-wrapper:last-of-type {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    pointer-events: none;
+    display: none;
+}
+
+.section.bg-image-grid > .default-content-wrapper:last-of-type p {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    line-height: 40.78px;
+}
+
+.section.bg-image-grid > .default-content-wrapper:last-of-type picture,
+.section.bg-image-grid > .default-content-wrapper:last-of-type img {
+    width: 100%;
+    height: 100%;
+}
+
+.section.bg-image-grid > .default-content-wrapper:last-of-type img {
+    object-fit: cover;
+    object-position: center;
+}
+
+/* Mobile background image - second-to-last default-content-wrapper */
+.section.bg-image-grid > .default-content-wrapper:nth-last-of-type(2) {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    pointer-events: none;
+    display: block;
+}
+
+.section.bg-image-grid > .default-content-wrapper:nth-last-of-type(2) p {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+}
+
+.section.bg-image-grid > .default-content-wrapper:nth-last-of-type(2) picture,
+.section.bg-image-grid > .default-content-wrapper:nth-last-of-type(2) img {
+    width: 100%;
+    height: 100%;
+}
+
+.section.bg-image-grid > .default-content-wrapper:nth-last-of-type(2) img {
+    object-fit: cover;
+    object-position: center;
+}
+
+/* Content stays above backgrounds */
+.section.bg-image-grid > *:not(:nth-last-of-type(-n + 2)) {
+    position: relative;
+    z-index: 1;
+}
+
+/* Show desktop, hide mobile at >= 768px */
+@media (width >= 48em) {
+    .section.bg-image-grid > .default-content-wrapper:last-of-type {
+        display: block;
+    }
+
+    .section.bg-image-grid > .default-content-wrapper:nth-last-of-type(2) {
+        display: none;
+    }
+}
+
+/* Background Image - uses image element(s) within the section as background
+   Supports single image OR dual images (desktop + mobile):
+   - Single image: One <p> with picture
+   - Dual images: First <p> = Desktop (on top), Second <p> = Mobile (behind)
+   In authoring: Both visible with desktop layered on top
+   On publish: Switches based on viewport
+*/
+.section.bg-image {
+    position: relative;
+    overflow: hidden;
+}
+
+.section.bg-image > .default-content-wrapper:last-of-type {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    pointer-events: none;
+    padding: 0;
+}
+
+.section.bg-image > .default-content-wrapper:last-of-type p {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+}
+
+.section.bg-image > .default-content-wrapper:last-of-type picture,
+.section.bg-image > .default-content-wrapper:last-of-type img {
+    width: 100%;
+    height: 100%;
+}
+
+.section.bg-image > .default-content-wrapper:last-of-type img {
+    object-fit: cover;
+    object-position: center;
+}
+
+/* Dual image layering: Desktop (first) on top, Mobile (second) behind
+   Both visible in authoring, viewport-based switching on publish */
+.section.bg-image > .default-content-wrapper:last-of-type p:first-of-type {
+    z-index: 1; /* Desktop on top */
+}
+
+.section.bg-image > .default-content-wrapper:last-of-type p:last-of-type {
+    z-index: 0; /* Mobile behind */
+}
+
+/* Published site: Switch based on viewport */
+/* stylelint-disable selector-class-pattern -- .aem-GridColumn is AEM-generated class */
+@media (width < 48em) {
+    .section.bg-image:not(.aem-GridColumn)
+        > .default-content-wrapper:last-of-type
+        p:first-of-type {
+        display: none;
+    }
+
+    .section.bg-image:not(.aem-GridColumn)
+        > .default-content-wrapper:last-of-type
+        p:last-of-type {
+        display: block;
+    }
+}
+
+@media (width >= 48em) {
+    .section.bg-image:not(.aem-GridColumn)
+        > .default-content-wrapper:last-of-type
+        p:first-of-type {
+        display: block;
+    }
+
+    .section.bg-image:not(.aem-GridColumn)
+        > .default-content-wrapper:last-of-type
+        p:last-of-type {
+        display: none;
+    }
+}
+/* stylelint-enable selector-class-pattern */
+
+.section.bg-image > *:not(:last-of-type) {
+    position: relative;
+    z-index: 1;
+}
+
+main > .section {
+    margin: 0 auto;
+}
+
+main > .section > div {
+    padding-right: calc(var(--bs-gutter-x) * 0.5);
+    padding-left: calc(var(--bs-gutter-x) * 0.5);
+}
+
+/* 
+@media (width >= 36em) {
+    main > .section > div {
+        max-width: 30.25rem;
+    }
+}
+
+@media (width >= 48em) {
+    main > .section > div {
+        --bs-gutter-x: 32px;
+
+        max-width: 43rem;
+    }
+}
+
+@media (width >= 62em) {
+    main > .section > div {
+        max-width: 58rem;
+    }
+}
+
+@media (width >= 75em) {
+    main > .section > div {
+        max-width: 69.25rem;
+    }
+}
+
+@media (width >= 87.5em) {
+    main > .section > div {
+        max-width: 74rem;
+    }
+}  */
+
+/* ==========================================================================
+   Grid 3 Columns Section Style (grid-3)
+   Container with 3-column grid layout for cards
+   ========================================================================== */
+
+.section.grid-3 {
+    --bs-gutter-x: 56px;
+    --bs-gutter-y: 0;
+
+    width: 100%;
+    padding-right: calc(var(--bs-gutter-x) * 0.5);
+    padding-left: calc(var(--bs-gutter-x) * 0.5);
+    margin-right: auto;
+    margin-left: auto;
+}
+
+@media (width >= 36em) {
+    .section.grid-3 {
+        max-width: 33.75rem;
+    }
+}
+
+@media (width >= 48em) {
+    .section.grid-3 {
+        --bs-gutter-x: 32px;
+
+        max-width: 45rem;
+    }
+}
+
+@media (width >= 62em) {
+    .section.grid-3 {
+        max-width: 60rem;
+    }
+}
+
+@media (width >= 75em) {
+    .section.grid-3 {
+        max-width: 71.25rem;
+    }
+}
+
+@media (width >= 87.5em) {
+    .section.grid-3 {
+        max-width: 74rem;
+    }
+}
+
+/* ==========================================================================
+   Hero Section Styles (hero-title-card, hero-card)
+   Used with bg-image for background image positioning
+   ========================================================================== */
+
+/* Hero Card - Section with card fragment and background image (no title) */
+.section.hero-card {
+    position: relative;
+    padding-top: 2.25rem;
+    padding-bottom: 3.75rem;
+    background-color: white;
+}
+
+.section.hero-card .fragment-wrapper {
+    position: relative;
+    z-index: 1;
+}
+
+@media (width >= 62em) {
+    .section.hero-card {
+        padding-top: 7.5rem;
+        padding-bottom: 12.5rem;
+    }
+}
+
+/* Hero Title Card - Section with h1, card fragment, and background image */
+.section.hero-title-card {
+    --bs-hero-h1-margin-y: 1.5rem;
+
+    position: relative;
+    min-height: 640px;
+    padding-top: 2.25rem;
+    padding-bottom: 3.75rem;
+}
+
+.section.hero-title-card h1 {
+    position: relative;
+    z-index: 1;
+    color: #fff;
+    margin: 0;
+}
+
+.section.hero-title-card .fragment-wrapper {
+    position: relative;
+    z-index: 1;
+}
+
+@media (width >= 62em) {
+    .section.hero-title-card .fragment-wrapper .fragment {
+        padding-top: 5.375rem;
+    }
+}
+
+.section.hero-title-card .fragment-wrapper .fragment {
+    padding-top: 3.125rem;
+}
+
+@media (width >= 62em) {
+    .section.hero-title-card {
+        --bs-hero-h1-margin-y: 2rem;
+
+        padding-top: 7.5rem;
+        padding-bottom: 12.5rem;
+    }
+}
+
+/* Hero background image positioning (works with bg-image) */
+.section.hero-card.bg-image > .default-content-wrapper:last-of-type picture,
+.section.hero-card.bg-image > .default-content-wrapper:last-of-type img,
+.section.hero-title-card.bg-image
+    > .default-content-wrapper:last-of-type
+    picture,
+.section.hero-title-card.bg-image > .default-content-wrapper:last-of-type img {
+    display: block;
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    max-width: 1920px;
+}
+
+/* Object position right on desktop */
+@media (width >= 62em) {
+    .section.hero-card.bg-image > .default-content-wrapper:last-of-type img,
+    .section.hero-title-card.bg-image
+        > .default-content-wrapper:last-of-type
+        img {
+        object-position: right;
+    }
+}
+
+/* END: Section Styles */

@@ -1,0 +1,47 @@
+Create a block named 'feature-lists' 
+based on this Figma URL: https://www.figma.com/design/lzko6KE6BO9AQRa7fb85dn/NiSource-Experience-Lab-Design?node-id=572-37538&m=dev
+
+First use mcp_figma-mcp_get_design_context and mcp_figma-mcp_get_screenshot to extract the generated code and visual from Figma, 
+then use mcp_aem-eds-mcp_generateEdsBlock to handle the complete generation including analysis, validation and section model updates. 
+
+Don't create files manually - use the MCP pipeline.
+
+#mcp_aem-eds-mcp_generateEdsBlock
+
+
+Create a block named 'quick-access-cards' 
+based on this Figma URL: https://www.figma.com/design/lzko6KE6BO9AQRa7fb85dn/NiSource-Experience-Lab-Design?node-id=572-37443&m=dev
+
+First use mcp_figma-mcp_get_design_context and mcp_figma-mcp_get_screenshot to extract the generated code and visual from Figma, 
+then use mcp_aem-eds-mcp_generateEdsBlock to handle the complete generation including analysis, validation and section model updates. 
+
+Don't create files manually - use the MCP pipeline.
+
+#mcp_aem-eds-mcp_generateEdsBlock
+
+
+
+
+
+Create a block named 'offer-carousel' 
+based on this Figma URL: https://www.figma.com/design/JVBIwTrUTJtvy6snVCu37S/Comcast-XLR8-Orals?node-id=13280-83583&m=dev
+
+Don't create files manually - use the MCP pipeline.
+
+#mcp_aem-eds-mcp_generateEdsBlock
+
+
+
+https://www.figma.com/design/a22zeHataamSBeRrqPvwvt/AEM-Landing-w--Kit?node-id=10813-19040&m=dev
+
+
+Create a block named 'mike-cards' 
+based on this Figma URL: https://www.figma.com/design/a22zeHataamSBeRrqPvwvt/AEM-Landing-w--Kit?node-id=10438-8072&m=dev
+
+Don't create files manually - use the MCP pipeline.
+
+#mcp_aem-eds-mcp_generateEdsBlock
+
+
+
+Generate an product-carousel-cards block from https://www.figma.com/design/aNupnmPRuzPHH9U6auYPC7/EY-Adobe-Design-Kit--Mazda?node-id=5229-8455&m=dev

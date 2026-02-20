@@ -1,0 +1,44 @@
+/* Mobile: video-card container */
+.video-card {
+  position: relative;
+  width: 322px;
+  height: 508px;
+  margin: 0.75rem auto;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* Mobile: video element */
+.video-card-background {
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 500px;
+  height: 510px;
+  display: block;
+}
+
+
+/* Desktop: 62em+ */
+@media (width >= 62em) {
+  .video-card {
+    height: 575px;
+  }
+
+  .video-card-background {
+    height: 575px;
+  }
+}
+
+/* Desktop: 75em+ */
+@media (width >= 75em) {
+  .video-card {
+    height: 683px;
+  }
+
+  .video-card-background {
+    height: 683px;
+  }
+}

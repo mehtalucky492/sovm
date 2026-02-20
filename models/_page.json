@@ -1,0 +1,65 @@
+{
+  "models": [
+    {
+      "id": "page-metadata",
+      "fields": [
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "jcr:title",
+          "label": "Title"
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "jcr:description",
+          "label": "Description"
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "keywords",
+          "multi": true,
+          "label": "Keywords"
+        },
+        {
+          "component": "select",
+          "name": "style",
+          "label": "Page Background color",
+          "options": [
+            {
+              "name": "Default",
+              "value": ""
+            },
+            {
+              "name": "Background Dark",
+              "value": "bg-primary"
+            },
+            {
+              "name": "Background Green",
+              "value": "bg-secondary"
+            },
+            {
+              "name": "Background Cyan",
+              "value": "image-grid-color"
+            }
+          ]
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "onetrust-domain-script",
+          "label": "OneTrust Domain Script ID",
+          "description": "The OneTrust domain script ID for cookie consent (e.g., 0191114e-a4d4-7077-8d4e-2a37d6921964-test). Set this on the index/home page only - it will be used site-wide."
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "recaptcha-site-key",
+          "label": "reCAPTCHA Site Key",
+          "description": "The reCAPTCHA site key for Google reCAPTCHA v2. Set this on the page with your form(s) - it will be used for all forms on the page that use setupRecaptchaForm()."
+        }
+      ]
+    }
+  ]
+}

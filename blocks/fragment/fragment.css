@@ -1,0 +1,580 @@
+/* stylelint-disable no-descending-specificity */
+
+/* ==========================================================================
+   VARIANT: Stay In Know (stay-in-know)
+   Card with bordered content box
+   Uses scoped CSS variables for responsive values
+   ========================================================================== */
+
+.fragment.var-stay-know {
+    /* Responsive variables - mobile defaults */
+    --sk-padding: 1.5rem;
+    --sk-heading-size: 1.25rem;
+    --sk-heading-margin: 0 0 1.6875rem;
+    --sk-body-size: 1rem;
+    --sk-body-line-height: 1.47;
+    --sk-button-margin: 1.9375rem;
+    --sk-button-max-width: 100%;
+    --sk-button-min-height: auto;
+    --sk-button-font-size: inherit;
+    --sk-button-padding: inherit;
+
+    /* Base styles */
+    border: 1px solid rgb(var(--bg-card-color));
+    background: rgb(var(--bg-card-color), var(--bg-opacity-secondary));
+    border-radius: 14px;
+    padding: var(--sk-padding);
+    max-width: 475px;
+    color: var(--bs-body-color);
+}
+
+@media (width >= 48em) {
+    .fragment.var-stay-know {
+        --sk-padding: 3rem;
+        --sk-heading-size: 2rem;
+        --sk-heading-margin: 0 0 1.375rem;
+        --sk-body-size: 1.125rem;
+        --sk-body-line-height: 1.45;
+        --sk-button-margin: 3.5625rem;
+        --sk-button-max-width: 373px;
+
+        box-sizing: border-box;
+    }
+}
+
+@media (width >= 62em) {
+    .fragment.var-stay-know {
+        --sk-button-min-height: 58px;
+        --sk-button-font-size: 1.125rem;
+        --sk-button-padding: 0.375rem 0.625rem 0.375rem 1.25rem;
+    }
+}
+
+/* Links */
+.fragment.var-stay-know a {
+    width: 100%;
+}
+
+/* Heading */
+.fragment.var-stay-know h1 {
+    font-family: "Vulf Sans", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: var(--sk-heading-size);
+    line-height: 1.25;
+    letter-spacing: 0;
+    margin: var(--sk-heading-margin);
+    color: var(--bs-body-color);
+}
+
+/* Paragraph */
+.fragment.var-stay-know p {
+    font-size: var(--sk-body-size);
+    line-height: var(--sk-body-line-height);
+    margin: 0 0 1rem;
+}
+
+.fragment.var-stay-know p:last-of-type {
+    margin-bottom: 0;
+}
+
+/* Icon buttons */
+.fragment.var-stay-know .icon-button-wrapper {
+    margin-top: 0.75rem;
+}
+
+.fragment.var-stay-know .default-content-wrapper + .icon-button-wrapper {
+    margin-top: var(--sk-button-margin);
+}
+
+.fragment.var-stay-know .icon-button {
+    max-width: var(--sk-button-max-width);
+    min-height: var(--sk-button-min-height);
+}
+
+.fragment.var-stay-know .icon-button a {
+    font-size: var(--sk-button-font-size);
+    padding: var(--sk-button-padding);
+}
+
+/* ==========================================================================
+   VARIANT: CTA Banner (var-cta-banner)
+   Full-width CTA banner with heading and icon links
+   Structure: .default-content-wrapper (h2) + .icon-button-wrapper elements
+   Mobile: All stacked vertically
+   Tablet (48em+): h2 on top, icon buttons in row below
+   Desktop (62em+): Full width, spaced layout
+   ========================================================================== */
+
+.fragment.var-cta-banner {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 3.75rem 0;
+    gap: 36px;
+    width: 100%;
+    max-width: 484px;
+}
+
+/* Heading + text block container */
+.fragment.var-cta-banner .default-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    width: 100%;
+    max-width: none;
+    padding: 0;
+}
+
+.fragment.var-cta-banner h2 {
+    font-family: "Vulf Sans", sans-serif;
+    font-weight: 700;
+    font-size: 1.25rem;
+    line-height: 1.625rem;
+    color: var(--bs-body-color);
+    margin: 0;
+}
+
+/* Paragraph text (if present with heading) */
+.fragment.var-cta-banner p {
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: var(--bs-body-color);
+    letter-spacing: 0;
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+.fragment.var-cta-banner p:last-of-type {
+    margin-bottom: 0;
+}
+
+/* Icon button wrappers - stack on mobile, row on tablet+ */
+.fragment.var-cta-banner .icon-button-wrapper {
+    padding: 0;
+    width: 100%;
+}
+
+.fragment.var-cta-banner .icon-button {
+    padding: 0;
+    width: 100%;
+}
+
+
+@media (width >= 48em) {
+    .fragment.var-cta-banner {
+        flex-flow: row wrap;
+        max-width: 1184px;
+        gap: 60px;
+        padding: 6rem 0;
+        align-items: flex-start;
+    }
+
+    /* Heading takes full row */
+    .fragment.var-cta-banner .default-content-wrapper {
+        flex: 0 0 100%;
+        gap: 12px;
+    }
+
+    /* Icon buttons in a row with auto width */
+    .fragment.var-cta-banner .icon-button-wrapper {
+        flex: 1;
+        width: auto;
+    }
+
+    .fragment.var-cta-banner .icon-button {
+        width: auto;
+    }
+    
+
+    .fragment.var-cta-banner h2 {
+        margin: 0;
+    }
+}
+
+
+@media (width >= 62em) {
+    .fragment.var-cta-banner {
+        gap: 60px;
+        padding: 6rem 0;
+        align-items: flex-start;
+    }
+
+    /* Text block: h2 and p side by side on desktop */
+    .fragment.var-cta-banner .default-content-wrapper {
+        flex-direction: row;
+        justify-content: space-between;
+        gap: unset;
+        width: 100%;
+    }
+
+    .fragment.var-cta-banner h2 {
+        max-width: 373px;
+        font-size: 2rem;
+        line-height: 2.5rem;
+    }
+
+    .fragment.var-cta-banner p {
+        max-width: 576px;
+        font-size: 1.125rem;
+        line-height: 1.625rem;
+        margin-bottom: 1.125rem;
+    }
+
+    .fragment.var-cta-banner p:last-of-type {
+        margin-bottom: 0;
+    }
+}
+
+@media (width >= 75em) {
+    /* Icon buttons spread across with space-between */
+    .fragment.var-cta-banner .icon-button-wrapper {
+        flex: 1;
+        max-width: 373px;
+    }
+
+    .fragment.var-cta-banner .icon-button-wrapper:first-of-type {
+        margin-left: 0;
+    }
+
+    .fragment.var-cta-banner .icon-button-wrapper:last-of-type {
+        margin-right: 0;
+    }
+}
+
+/* ==========================================================================
+   VARIANT: Sub Heading (var-sub-heading)
+   Text heading with styling for image-grid sections
+   Mobile: Centered, Tablet/Desktop: Left aligned
+   ========================================================================== */
+
+.fragment.var-sub-heading {
+    max-width: 373px;
+    margin: 0 auto; /* Center on mobile */
+
+}
+
+.fragment.var-sub-heading h3 {
+    font-family: "Vulf Sans", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 1.25rem;
+    line-height: 1.299;
+    letter-spacing: 0;
+    margin: 0 0 2.3125rem;
+    width: auto;
+}
+
+/* Any default-content-wrapper after the first one gets extra top margin on its h3 */
+.fragment.var-sub-heading .default-content-wrapper ~ .default-content-wrapper h3 {
+    margin-top: 7.75rem;
+}
+
+.fragment.var-sub-heading p {
+    font-size: 1rem;
+    line-height: 1.5;
+    margin: 0 0 1rem;
+}
+
+/* Stacked icon buttons */
+.fragment.var-sub-heading .icon-button-wrapper {
+    margin-top: 1.5rem;
+}
+
+.fragment.var-sub-heading .default-content-wrapper + .icon-button-wrapper {
+    margin-top: 2.125rem;
+}
+
+.fragment.var-sub-heading .icon-button {
+    margin-top: 0;
+    width: 100%;
+    max-width: 243px;
+}
+
+.fragment.var-sub-heading .icon-button a {
+    width: 100%;
+    justify-content: space-between;
+}
+
+@media (width >= 48em) {
+    .fragment.var-sub-heading {
+        margin: 0; /* Left align on tablet/desktop */
+        text-align: left;
+    }
+
+    .fragment.var-sub-heading h3 {
+        font-size: 2rem;
+        line-height: 2.5rem;
+        max-width: 400px;
+        margin-bottom: 2.875rem;
+    }
+
+    .fragment.var-sub-heading p {
+        font-size: 1.125rem;
+        line-height: 1.625;
+    }
+
+    .fragment.var-sub-heading .default-content-wrapper + .icon-button-wrapper {
+        margin-top: 2.125rem;
+    }
+
+    .fragment.var-sub-heading .icon-button {
+        max-width: 243px;
+    }
+}
+
+@media (width >= 62em) {
+    .fragment.var-sub-heading .default-content-wrapper + .icon-button-wrapper {
+        margin-top: 3.75rem;
+    }
+
+    .fragment.var-sub-heading .icon-button {
+        max-width: 373px;
+    }
+}
+
+/* ==========================================================================
+   VARIANT: Lottie Player (lottie-player)
+   Paragraph styles for lottie animation sections
+   ========================================================================== */
+
+.fragment.lottie-player p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    letter-spacing: 0;
+}
+
+.fragment.lottie-player p:last-of-type {
+    margin-bottom: 0;
+}
+
+@media (width >= 62em) {
+    .fragment.lottie-player p {
+        margin-bottom: 1.125rem;
+        letter-spacing: 0;
+    }
+}
+
+@media (width >= 48em) {
+    .fragment.lottie-player p {
+        font-size: 1.125rem;
+    }
+}
+
+/* ==========================================================================
+   VARIANT: Mission Card (var-mission-card)
+   Card styling with gradient background and border
+   ========================================================================== */
+
+.fragment.var-mission-card {
+    background: #a7ffe2;
+    border: 10px solid #50ffc5;
+    overflow: hidden;
+    min-height: 763px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Content wrapper */
+.fragment.var-mission-card > .default-content-wrapper,
+.fragment.var-mission-card > .video-card-wrapper,
+.fragment.var-mission-card > .icon-button-wrapper {
+    width: 100%;
+    padding: 0 1.125rem;
+}
+
+/* H3 Heading */
+.fragment.var-mission-card h3 {
+    font-family: "Vulf Sans", sans-serif;
+    font-weight: 700;
+    font-size: 1.25rem;
+    line-height: 1.25;
+    max-width: 464px;
+    margin: 0 auto;
+    padding: 0 0.625rem;
+    color: #434343;
+}
+
+/* Video Card */
+.fragment.var-mission-card .video-card-wrapper {
+    margin: 1.0625rem auto 0.75rem;
+    position: relative;
+    height: 518px;
+    width: 322px;
+    overflow: hidden;
+    padding: 0;
+}
+
+.fragment.var-mission-card .video-card {
+    width: 100%;
+    height: 100%;
+}
+
+.fragment.var-mission-card .video-card video {
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 510px;
+    width: 500px;
+}
+
+/* Icon Button */
+.fragment.var-mission-card .icon-button-wrapper {
+    margin: 0;
+}
+
+.fragment.var-mission-card .icon-button {
+    margin: 0 auto;
+    max-width: 373px;
+}
+
+@media (width >= 48em) {
+    .fragment.var-mission-card {
+        border-width: 20px;
+        max-width: 720px;
+        padding-top: 3.75rem;
+        padding-bottom: 3.75rem;
+    }
+
+    .fragment.var-mission-card h3 {
+        font-size: 2rem;
+    }
+
+    .fragment.var-mission-card .video-card-wrapper {
+        margin: 2.0625rem auto;
+    }
+}
+
+@media (width >= 62em) {
+    .fragment.var-mission-card .video-card-wrapper {
+        height: 575px;
+    }
+
+    .fragment.var-mission-card .video-card video {
+        height: 575px;
+    }
+
+    .fragment.var-mission-card .icon-button {
+        min-height: 58px;
+    }
+
+    .fragment.var-mission-card .icon-button a {
+        font-size: 1.125rem;
+        padding: 0.375rem 0.625rem 0.375rem 1.25rem;
+    }
+}
+
+@media (width >= 75em) {
+    .fragment.var-mission-card .video-card-wrapper {
+        height: 683px;
+    }
+
+    .fragment.var-mission-card .video-card video {
+        height: 683px;
+    }
+}
+
+/* ==========================================================================
+   VARIANT: Mission Carousel (var-mission-carousel)
+   Centered content that fills the parent fragment-wrapper height
+   ========================================================================== */
+
+/* Parent fragment-wrapper needs to stretch */
+.fragment-wrapper:has(.fragment.var-mission-carousel) {
+    display: flex;
+    height: auto;
+}
+
+/* Fragment fills parent and centers content */
+.fragment.var-mission-carousel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    flex: 1;
+}
+
+/* Carousel wrapper centers within */
+.fragment.var-mission-carousel > .sovm-carousel-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    flex: 1;
+}
+
+/* Carousel block fills available space */
+.fragment.var-mission-carousel .sovm-carousel {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* ==========================================================================
+   FRAGMENT STYLE: bg-image
+   When fragment has bg-image class, position background image from last
+   default-content-wrapper behind other content
+   ========================================================================== */
+
+.fragment.bg-image {
+    position: relative;
+    overflow: hidden;
+}
+
+.fragment.bg-image > .default-content-wrapper:last-of-type {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    pointer-events: none;
+    padding: 0;
+}
+
+.fragment.bg-image > .default-content-wrapper:last-of-type p {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+}
+
+.fragment.bg-image > .default-content-wrapper:last-of-type picture,
+.fragment.bg-image > .default-content-wrapper:last-of-type img {
+    width: 100%;
+    height: 100%;
+}
+
+.fragment.bg-image > .default-content-wrapper:last-of-type img {
+    object-fit: cover;
+    object-position: center;
+}
+
+/* Keep other content above background */
+.fragment.bg-image > *:not(.default-content-wrapper:last-of-type) {
+    position: relative;
+    z-index: 1;
+}
+
+/* ==========================================================================
+   FRAGMENT STYLE: sovm-carousel-container
+   Styles for fragment with sovm-carousel-container class
+   ========================================================================== */
+
+.fragment.sovm-carousel-container {
+    position: relative;
+}
+
+.fragment.sovm-carousel-container > .sovm-carousel-wrapper {
+    position: relative;
+    z-index: 1;
+}

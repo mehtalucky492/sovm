@@ -1,0 +1,308 @@
+/*
+ * Copyright 2020 Adobe. All rights reserved.
+ * This file is licensed to you under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License. You may obtain a copy
+ * of the License at http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under
+ * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+ * OF ANY KIND, either express or implied. See the License for the specific language
+ * governing permissions and limitations under the License.
+ */
+
+:root {
+    --link-hover-color: #1d3ecf;
+    --sovm-header: #282b3a;
+    --nav-color: #50ffc5;
+}
+
+@media (width >= 900px) {
+  :root {
+    /* body sizes */
+    --body-font-size-m: 18px;
+    --body-font-size-s: 16px;
+    --body-font-size-xs: 14px;
+
+    /* heading sizes */
+    --heading-font-size-xxl: 45px;
+    --heading-font-size-xl: 36px;
+    --heading-font-size-l: 28px;
+    --heading-font-size-m: 22px;
+    --heading-font-size-s: 20px;
+    --heading-font-size-xs: 18px;
+  }
+}
+
+html {
+  overflow-x: hidden;
+}
+
+body {
+  display: none;
+  margin: 0;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+body.appear {
+  display: block;
+}
+
+
+header .header,
+footer .footer {
+  visibility: hidden;
+}
+
+header .header[data-block-status="loaded"],
+footer .footer[data-block-status="loaded"] {
+  visibility: visible;
+}
+
+h1 {
+  font-size: 3.75rem;
+  line-height: 4.25rem;
+  max-width: 480px;
+  margin-bottom: 5.9375rem;
+}
+
+p,
+dl,
+ol,
+ul,
+pre,
+blockquote {
+  margin-top: 0.8em;
+  margin-bottom: 0.25em;
+}
+
+code,
+pre {
+  font-size: var(--body-font-size-s);
+}
+
+pre {
+  padding: 16px;
+  border-radius: 8px;
+  background-color: var(--light-color);
+  overflow-x: auto;
+  white-space: pre;
+}
+
+main > div {
+  margin: 40px 16px;
+}
+
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+/* links */
+a:any-link {
+  color: var(--link-color);
+  text-decoration: none;
+  overflow-wrap: break-word;
+}
+
+a:hover {
+  color: var(--link-hover-color);
+  text-decoration: underline;
+}
+
+main img {
+  max-width: 100%;
+  width: auto;
+  height: auto;
+}
+
+.icon {
+  display: inline-block;
+  height: 24px;
+  width: 24px;
+}
+
+.icon img {
+  height: 100%;
+  width: 100%;
+}
+
+/* sections */
+main > .section {
+  margin: 40px 0;
+}
+
+main > .section > div {
+  max-width: 1200px;
+  margin: auto;
+  padding: 0 24px;
+}
+
+main > .section:first-of-type {
+  margin-top: 0;
+}
+
+@media (width >= 900px) {
+  main > .section > div {
+    padding: 0 32px;
+  }
+}
+
+/* section metadata */
+main .section.light,
+main .section.highlight {
+  background-color: var(--light-color);
+  margin: 0;
+  padding: 40px 0;
+}
+
+/* Faintly template system styles */
+.faintly-original-content,
+.faintly-rendered-content {
+  width: 100%;
+}
+
+/* Hide unnecessary empty elements in Universal Editor */
+.ue-active .faintly-rendered-content,
+.aue-active .faintly-rendered-content,
+body.ue-active .faintly-rendered-content,
+body.aue-active .faintly-rendered-content {
+  display: none !important;
+}
+
+/* Make editable original content visible in Universal Editor */
+.ue-active .faintly-original-content,
+.aue-active .faintly-original-content,
+body.ue-active .faintly-original-content,
+body.aue-active .faintly-original-content {
+  display: block !important;
+}
+
+
+/* Section/Fragment style: side-by-side layout
+   Bootstrap-style row/column system
+   Mobile: Stacked vertically
+   Tablet/Desktop (>= 768px): Equal-width columns within container
+   Container max-width applied to section, children share space equally */
+
+/* Mobile: Stack vertically with spacing */
+main > .section.side-by-side > div,
+.fragment.side-by-side.block > div {
+  margin-bottom: var(--bs-gutter-y, 1.5rem);
+}
+
+main > .section.side-by-side > div:last-child,
+.fragment.side-by-side.block > div:last-child {
+  margin-bottom: 0;
+}
+
+/* Tablet/Desktop: Side by side within container */
+@media (width >= 48em) {
+  /* Section becomes the container with max-width */
+  main > .section.side-by-side {
+    --bs-gutter-x: 32px;
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--bs-gutter-x);
+    align-items: flex-start;
+    max-width: 43rem;
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+
+  .fragment.side-by-side.block {
+    --bs-gutter-x: 32px;
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--bs-gutter-x);
+    align-items: flex-start;
+  }
+
+  /* Each child shares the space equally, remove individual max-width */
+  main > .section.side-by-side > div,
+  .fragment.side-by-side.block > div {
+    flex: 1 1 0;
+    min-width: 0;
+    max-width: none;
+    padding: 0;
+    margin: 0;
+  }
+}
+
+@media (width >= 62em) {
+  main > .section.side-by-side {
+    max-width: 58rem;
+  }
+}
+
+@media (width >= 75em) {
+  main > .section.side-by-side {
+    max-width: 69.25rem;
+  }
+}
+
+@media (width >= 87.5em) {
+  main > .section.side-by-side {
+    max-width: 74rem;
+  }
+}
+
+/* Section/Fragment style: side-by-side-large layout
+   Same as side-by-side but starts at larger breakpoint (62em / 992px)
+   Mobile/Tablet: Stacked vertically
+   Desktop (>= 992px): Equal-width columns within container */
+
+/* stylelint-disable no-descending-specificity -- side-by-side-large intentionally extends side-by-side */
+
+/* Mobile/Tablet: Stack vertically with spacing */
+main > .section.side-by-side-large > div,
+.fragment.side-by-side-large.block > div {
+  margin-bottom: var(--bs-gutter-y, 1.5rem);
+}
+
+main > .section.side-by-side-large > div:last-child,
+.fragment.side-by-side-large.block > div:last-child {
+  margin-bottom: 0;
+}
+
+/* stylelint-enable no-descending-specificity */
+
+/* Desktop: Side by side within container */
+@media (width >= 62em) {
+  /* Section becomes the container with max-width */
+  main > .section.side-by-side-large {
+    max-width: 1440px;
+    padding: 0 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+
+  .fragment.side-by-side-large.block {
+    --bs-gutter-x: 32px;
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--bs-gutter-x);
+    align-items: stretch;
+  }
+
+  /* Each child shares the space equally, remove individual max-width */
+  main > .section.side-by-side-large > div,
+  .fragment.side-by-side-large.block > div {
+    flex: 1 1 0;
+    min-width: 0;
+    max-width: none;
+    padding: 0;
+    margin: 0;
+  }
+}

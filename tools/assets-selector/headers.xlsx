@@ -1,0 +1,4 @@
+key	value
+access-control-allow-origin	https://experience.adobe.com
+access-control-allow-methods	GET, OPTIONS
+access-control-allow-headers	Content-Type

@@ -1,0 +1,47 @@
+{
+  "repoNames": [
+    "author-p172753-e1854962.adobeaemcloud.com",
+    "delivery-p172753-e1854962.adobeaemcloud.com"
+  ],
+  "aemTierType": [
+    "delivery",
+    "author"
+  ],
+  "expiryOptions": {
+    "allowSelectionAndDrag": false
+  },
+  "filterSchema": [
+    {
+      "fields": [
+        {
+          "defaultValue": ["image/*"],
+          "element": "checkbox",
+          "name": "type",
+          "options": [
+            {
+              "label": "Image",
+              "readOnly": true,
+              "value": "image/*"
+            }
+          ]
+        }
+      ],
+      "groupKey": "FileTypeGroup",
+      "header": "File Type"
+    },
+    {
+      "fields": [
+        {
+          "element": "checkbox",
+          "name": "property=metadata.application.xcm:keywords.id",
+          "options": []
+        }
+      ],
+      "groupKey": "TagsGroup",
+      "header": "Tags"
+    }
+  ],
+  "filterSchemaMapping": {},
+  "assetDomainMapping": {},
+  "rootPath": "/content/dam"
+}

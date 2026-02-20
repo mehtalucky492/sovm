@@ -1,0 +1,32 @@
+.block.lottie-player .lottie-player-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.block.lottie-player lottie-player {
+  width: 100%;
+  height: auto;
+}
+
+/* Block Lottie Player Variant 
+.block.lottie-player {
+  position: relative;
+  margin: 0 -2.5rem -9%;
+  top: -7px;
+}
+
+@media (width >= 48em) {
+  .block.lottie-player {
+    margin-bottom: 1.875rem;
+  }
+}
+
+@media (width >= 62em) {
+.block.lottie-player {
+    margin: 0 -1.625rem -9%;
+    margin-bottom: -16%;
+    top: -120px;
+    right: 0;
+  }
+} */

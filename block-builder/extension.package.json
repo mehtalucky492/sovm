@@ -1,0 +1,85 @@
+{
+  "name": "block-builder-workflow",
+  "displayName": "Block Builder Workflow",
+  "description": "LangGraph-based workflow orchestration for Figma to EDS block generation",
+  "version": "1.0.0",
+  "publisher": "adobe-code-kit",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onLanguageModelTool:block-builder_generate"
+  ],
+  "main": "./dist/mcp-tool.js",
+  "contributes": {
+    "languageModelTools": [
+      {
+        "name": "block-builder_generate",
+        "displayName": "Generate EDS Block from Figma",
+        "description": "Orchestrated workflow to generate Adobe EDS blocks from Figma designs with error handling and validation",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "blockName": {
+              "type": "string",
+              "description": "Block name in lowercase-hyphenated format (e.g., 'feature-cards')"
+            },
+            "figmaUrl": {
+              "type": "string",
+              "description": "Complete Figma URL with node-id parameter"
+            },
+            "figmaNodeId": {
+              "type": "string",
+              "description": "Figma node ID in format '13157:13513' (alternative to figmaUrl)"
+            },
+            "outputPath": {
+              "type": "string",
+              "description": "Output directory path (default: './blocks')"
+            },
+            "skipScreenshot": {
+              "type": "boolean",
+              "description": "Skip screenshot capture for faster generation"
+            },
+            "updateSectionModel": {
+              "type": "boolean",
+              "description": "Add block to section model (default: true)"
+            },
+            "validateOutput": {
+              "type": "boolean",
+              "description": "Run validation after generation (default: true)"
+            },
+            "strictValidation": {
+              "type": "boolean",
+              "description": "Enable strict validation mode (default: false)"
+            },
+            "persistContext": {
+              "type": "boolean",
+              "description": "Save intermediate context files (default: true)"
+            }
+          },
+          "required": ["blockName"]
+        },
+        "canBeReferencedInPrompt": true
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run build",
+    "build": "tsc",
+    "watch": "tsc --watch"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "@types/vscode": "^1.85.0",
+    "typescript": "^5.3.0"
+  },
+  "dependencies": {
+    "@langchain/core": "^0.3.0",
+    "@langchain/langgraph": "^0.2.0",
+    "@modelcontextprotocol/sdk": "^0.5.0",
+    "zod": "^3.22.0"
+  }
+}

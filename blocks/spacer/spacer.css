@@ -1,0 +1,34 @@
+.spacer {
+  width: 100%;
+  display: block;
+}
+
+/* 20px - Small */
+.spacer.s-20 {
+  height: 20px;
+}
+
+/* 54px - Medium */
+.spacer.m-54 {
+  height: 54px;
+}
+
+/* 70px - Large */
+.spacer.l-70 {
+  height: 70px;
+}
+
+/* 100px - Extra Large */
+.spacer.xl-100 {
+  height: 100px;
+}
+
+/* 120px - XXL */
+.spacer.xxl-120 {
+  height: 120px;
+}
+
+/* 140px - XXXL */
+.spacer.xxxl-140 {
+  height: 140px;
+}

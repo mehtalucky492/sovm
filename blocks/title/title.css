@@ -1,0 +1,20 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-top: 0.8em;
+  margin-bottom: 0.25em;
+  font-family: var(--heading-font-family);
+  font-weight: 600;
+  line-height: 1.25;
+  scroll-margin: 40px;
+}
+
+h1 { font-size: var(--desktop-h1-size); }
+h2 { font-size: var(--desktop-h2-size); }
+h3 { font-size: var(--desktop-h3-size); }
+h4 { font-size: var(--desktop-h4-size); }
+h5 { font-size: var(--desktop-h5-size); }
+h6 { font-size: var(--desktop-h6-size); }

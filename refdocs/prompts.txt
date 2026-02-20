@@ -1,0 +1,16 @@
+Prompt 1:
+
+How would you recommend that this stylesheet be improved and made more granular so that styles can be reused?
+
+Prompt 2:
+
+A lot of these classes are used to style sections and are defined in the options for the section field style in _section.json. It does this by adding the selected values to the section's class attribute in html. How would these changes affect these selections?
+
+Prompt 3 (because the answer in prompt 2 was a refactor that maintained the class names):
+
+Thanks I needed you to understand that context, but what if I am ok with changing the section options? I would just want to have as few options as possible without compromising granularity.
+
+This gave a good answer and then offer to begin implementation. 
+I would make some changes to the names as we discussed, but 
+whatever you think is best is fine with me.
+

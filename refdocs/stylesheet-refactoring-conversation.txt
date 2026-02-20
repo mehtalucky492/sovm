@@ -1,0 +1,395 @@
+STYLESHEET REFACTORING CONVERSATION
+====================================
+Date: January 30, 2026
+Project: Otsuka CodeKit SOVM (Adobe EDS XWalk)
+
+===============================================================================
+INITIAL QUESTION: How to improve site.css for better granularity and reusability?
+===============================================================================
+
+CURRENT STATE:
+- site.css: 1194 lines
+- Contains 16+ section-specific style classes
+- Heavy duplication of patterns
+- Hardcoded values instead of design tokens
+- Section styles defined in _section.json options field
+
+ISSUES IDENTIFIED:
+1. Hardcoded, repetitive media query breakpoints scattered throughout
+2. Block-specific selectors with duplicated patterns (.section.home-two-col-title-text, etc.)
+3. Repeated layout patterns (grid templates, max-widths, padding formulas)
+4. Typography styles hardcoded per section instead of using variables
+5. Spacing values repeated without systematic tokens
+
+===============================================================================
+INITIAL RECOMMENDATIONS
+===============================================================================
+
+1. CREATE BREAKPOINT VARIABLES & CONTAINER UTILITIES
+   :root {
+     --breakpoint-sm: 36em;    /* 576px */
+     --breakpoint-md: 48em;    /* 768px */
+     --breakpoint-lg: 62em;    /* 992px */
+     --breakpoint-xl: 75em;    /* 1200px */
+     --breakpoint-xxl: 87.5em; /* 1400px */
+     
+     --container-sm: 30.25rem;
+     --container-md: 43rem;
+     --container-lg: 58rem;
+     --container-xl: 69.25rem;
+     --container-xxl: 74rem;
+   }
+
+2. EXTRACT REUSABLE CONTAINER CLASSES
+   Replace repeated section max-width patterns with utility classes
+
+3. CREATE TYPOGRAPHY TOKEN SYSTEM
+   :root {
+     --font-size-sm: 1rem;
+     --font-size-md: 1.125rem;
+     --font-size-lg: 1.25rem;
+     --font-size-xl: 2rem;
+     --font-size-2xl: 2.25rem;
+     --font-size-3xl: 3.75rem;
+     
+     --line-height-tight: 1.25;
+     --line-height-normal: 1.5;
+     --line-height-relaxed: 1.625;
+   }
+
+4. CREATE SPACING SCALE
+   :root {
+     --spacing-xs: 0.5rem;
+     --spacing-sm: 1rem;
+     --spacing-md: 1.5rem;
+     --spacing-lg: 2.25rem;
+     --spacing-xl: 3.75rem;
+     --spacing-2xl: 6rem;
+     --spacing-3xl: 12.5rem;
+   }
+
+5. EXTRACT LAYOUT UTILITIES
+   .grid-2-col { display: grid; grid-template-columns: 1fr; gap: var(--spacing-md); }
+   .flex-center { display: flex; align-items: center; justify-content: center; }
+
+6. CREATE COMPONENT BASE CLASSES
+   .card { border-radius: 14px; padding: var(--spacing-md); }
+
+7. SEPARATE CONCERNS INTO MULTIPLE FILES
+   - root.css - CSS variables and design tokens
+   - utilities.css - Container, grid, spacing utilities
+   - typography.css - Text styles and heading scales
+   - components.css - Reusable card, button patterns
+   - sections.css - Page-specific section styles
+   - site.css - Imports all above
+
+8. USE COMPOSITION OVER SPECIFICITY
+
+ESTIMATED RESULT: Reduce from 1194 lines to ~400-500 lines
+
+===============================================================================
+SECTION OPTIONS CONTEXT
+===============================================================================
+
+USER CLARIFICATION:
+Many section style classes are used in Universal Editor authoring:
+- Defined in _section.json "style" field options
+- Authors select values that get added to section's class attribute in HTML
+- Example: "Mission | 2 Col- Title | Text" → class="mission-two-col-title-text"
+
+CURRENT SECTION OPTIONS (16 total):
+1. highlight
+2. bg-primary (Background Gray)
+3. bg-secondary (Background Green)
+4. home-two-col-title-text (Home | 2 Col- Title | Text)
+5. mission-two-col-title-text (Mission | 2 Col- Title | Text)
+6. text-with-link (Text with link icon)
+7. image-grid (Image Grid)
+8. image-grid-color (Image Grid Color)
+9. video-carousel-left (2 Col Video Carousel Left)
+10. video-carousel-right (2 Col Video Carousel Right)
+11. express-card (Express Card)
+12. join-cta-links (Join | Cta-Links)
+13. advocacy-card (Advocacy Card)
+14. grid-3 (Grid 3 Columns)
+15. no-grid (No Grid - Stacked)
+16. text-carousel (2 Col Text Carousel)
+
+ARCHITECTURE FLOW:
+Author selects → "Mission | 2 Col- Title | Text"
+       ↓
+Universal Editor adds class → mission-two-col-title-text
+       ↓
+CSS targets → .section.mission-two-col-title-text { ... }
+
+===============================================================================
+REFACTORING APPROACH (KEEPING CLASS NAMES)
+===============================================================================
+
+STRATEGY: Keep class names, refactor internal composition
+- No changes to _section.json
+- No changes to authored content
+- No changes to authoring UX
+- CSS becomes maintainable via tokens
+- Easier to create new section styles
+
+BEFORE (hardcoded):
+.section.mission-two-col-title-text {
+    padding-top: 2.9375rem;
+    padding-bottom: 2.9375rem;
+}
+.section.mission-two-col-title-text h1 {
+    color: rgb(var(--bg-primary-rgb));
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+    max-width: 285px;
+    margin-bottom: 3.75rem;
+}
+
+AFTER (with tokens):
+.section.mission-two-col-title-text {
+    padding-block: var(--spacing-lg);
+}
+.section.mission-two-col-title-text h1 {
+    color: var(--color-dark);
+    font-size: var(--desktop-h1-size);
+    line-height: var(--desktop-h1-line-height);
+    max-width: var(--measure-narrow);
+    margin-bottom: var(--spacing-xl);
+}
+
+===============================================================================
+PROPOSED MINIMAL SECTION OPTIONS (NEW APPROACH)
+===============================================================================
+
+USER REQUEST: OK with changing section options - wants as few as possible without compromising granularity
+
+ANALYSIS:
+Current section styles mix:
+- Layout concerns (2-col, 3-col, grid)
+- Background/color concerns
+- Typography concerns
+- Spacing concerns
+
+PROPOSED REFACTORED SYSTEM (10 composable options):
+
+=== BACKGROUNDS ===
+{ "name": "Dark Background", "value": "bg-dark" }
+{ "name": "Green Tint", "value": "bg-green-tint" }
+{ "name": "Teal Background", "value": "bg-teal" }
+
+=== SPACING ===
+{ "name": "Compact Padding", "value": "py-compact" }
+{ "name": "Standard Padding", "value": "py-standard" }
+{ "name": "Generous Padding", "value": "py-generous" }
+{ "name": "Remove Top Padding", "value": "pt-0" }
+{ "name": "Remove Bottom Padding", "value": "pb-0" }
+
+=== LAYOUT ===
+{ "name": "Full Width", "value": "full-width" }
+{ "name": "Narrow Container", "value": "container-narrow" }
+
+AUTHORS CAN COMBINE THESE (multiselect):
+- bg-dark + py-generous + pt-0 = old home-two-col-title-text
+- bg-teal + full-width = old video-carousel-left
+
+OLD LAYOUT MAPPING TO NEW SYSTEM:
+
+| Old Section Style          | New Composition                    | Specific Styling Moves To      |
+|---------------------------|------------------------------------|--------------------------------|
+| home-two-col-title-text   | bg-dark + py-generous + pt-0       | Typography → .columns block    |
+| mission-two-col-title-text| py-generous                        | Typography → .columns block    |
+| video-carousel-left       | bg-teal + full-width               | Layout → .sovm-carousel block  |
+| video-carousel-right      | full-width + pb-0                  | Layout → .sovm-carousel block  |
+| text-carousel             | bg-green-tint + py-generous        | Grid layout → .sovm-carousel   |
+| join-cta-links            | full-width + py-generous           | Specific styling → .cta-links  |
+| image-grid                | container-narrow                   | Grid → .columns/.image-grid    |
+| image-grid-color          | bg-teal + container-narrow         | Grid → block CSS               |
+
+===============================================================================
+CONTAINER-NARROW CSS DISCUSSION
+===============================================================================
+
+QUESTION: What would container-narrow CSS be?
+
+CURRENT DEFAULT SECTION CONTAINER:
+main > .section > div {
+    padding-right: calc(var(--bs-gutter-x) * 0.5);
+    padding-left: calc(var(--bs-gutter-x) * 0.5);
+}
+
+@media (width >= 36em) { max-width: 30.25rem; }  /* 484px */
+@media (width >= 48em) { max-width: 43rem; }     /* 688px */
+@media (width >= 62em) { max-width: 58rem; }     /* 928px */
+@media (width >= 75em) { max-width: 69.25rem; }  /* 1108px */
+@media (width >= 87.5em) { max-width: 74rem; }   /* 1184px */
+
+INITIAL SUGGESTIONS:
+1. Fixed narrow width (880px max)
+2. Proportional scaling
+3. CSS variable approach
+
+USER CLARIFICATION: Intent is for ~50% viewport at high resolution, stack vertically on mobile
+
+FINAL CONTAINER-NARROW RECOMMENDATION:
+
+/* Mobile: full width (inherits default) */
+
+@media (width >= 48em) {
+    .section.container-narrow > div {
+        max-width: min(50vw, 720px); /* Half viewport, capped at 720px */
+    }
+}
+
+OR MORE DETAILED:
+
+@media (width < 48em) {
+    .section.container-narrow > div {
+        max-width: 100%;
+    }
+}
+
+@media (width >= 48em) {
+    .section.container-narrow > div {
+        max-width: 50vw;
+        padding-right: calc(var(--bs-gutter-x) * 0.5);
+        padding-left: calc(var(--bs-gutter-x) * 0.5);
+    }
+}
+
+@media (width >= 62em) {
+    .section.container-narrow > div {
+        max-width: 45vw;
+    }
+}
+
+@media (width >= 90em) {
+    .section.container-narrow > div {
+        max-width: 720px; /* Cap at reasonable size for ultra-wide */
+    }
+}
+
+USE CASES:
+- Two container-narrow sections side-by-side at desktop
+- Narrow section next to full-width element
+- Asymmetric layouts where content hugs one side
+
+===============================================================================
+CSS VARIABLE: --bs-gutter-x
+===============================================================================
+
+QUESTION: What is the value of --bs-gutter-x?
+
+ANSWER: Two values depending on breakpoint:
+
+DEFAULT (mobile/tablet):
+:root {
+    --bs-gutter-x: 56px;
+}
+
+DESKTOP OVERRIDE (768px+):
+@media (width >= 48em) {
+    main > .section > div {
+        --bs-gutter-x: 32px;
+    }
+}
+
+SUMMARY:
+- Mobile: 56px (wider gutters)
+- Desktop: 32px (tighter gutters, more horizontal space for content)
+
+===============================================================================
+EXISTING FILE STRUCTURE
+===============================================================================
+
+CSS FILES IN /styles/:
+- /styles/slick.css
+- /styles/styles.css (main EDS framework styles)
+- /styles/onetrust.css
+- /styles/lazy-styles.css
+- /styles/site.css (1194 lines - project-specific overrides)
+- /styles/fonts.css
+- /styles/root.css (design tokens - HAS MERGE CONFLICT!)
+
+root.css CONTAINS:
+- Color tokens (has merge conflict markers)
+- Font family variables
+- Desktop typography scale (from Figma)
+- Already has some design system tokens
+
+styles.css CONTAINS:
+- EDS framework base styles
+- Additional heading/body size variables
+- Core structural styles
+
+===============================================================================
+KEY TAKEAWAYS
+===============================================================================
+
+1. ARCHITECTURE DECISION:
+   - Can refactor CSS internally while keeping section class names unchanged
+   - OR can refactor to composable utility approach with new section options
+
+2. COMPOSABLE UTILITY APPROACH (RECOMMENDED):
+   - 10 simple, combinable options instead of 16 specific ones
+   - Better separation of concerns
+   - More flexible for authors
+   - Easier to maintain
+   - Specific styling moves to block CSS where it belongs
+
+3. BENEFITS:
+   - Reduce site.css from 1194 lines to ~300-400 lines
+   - Remove duplication
+   - Use design tokens consistently
+   - Easier to add new patterns
+   - Better maintainability
+
+4. IMPLEMENTATION STEPS (if proceeding):
+   a. Fix root.css merge conflict
+   b. Add missing design tokens to root.css
+   c. Update _section.json with new composable options
+   d. Create utility classes in site.css
+   e. Move block-specific styles to block CSS files
+   f. Run npm run build:json
+
+5. NO BREAKING CHANGES TO:
+   - Universal Editor authoring experience
+   - Existing component blocks
+   - File structure (if keeping class names approach)
+
+===============================================================================
+NEXT STEPS (AWAITING USER DECISION)
+===============================================================================
+
+OPTIONS PRESENTED:
+A) Create comprehensive utilities.css with all reusable patterns
+B) Fix root.css merge conflict and expand design token system
+C) Show before/after example of one section refactored
+D) Complete refactoring of entire stylesheet system
+
+===============================================================================
+TECHNICAL SPECIFICATIONS
+===============================================================================
+
+PROJECT CONTEXT:
+- Adobe Edge Delivery Services (EDS) XWalk project
+- Transforms Figma designs to production-ready web components
+- Uses Universal Editor for content authoring
+- Block-based architecture (CSS/JS + JSON models)
+
+DESIGN SYSTEM:
+- Font: Vulf Sans
+- Primary colors: #282b3a (dark), #50ffc5 (green), #a7ffe2 (teal)
+- Current gutters: 56px (mobile), 32px (desktop)
+- Responsive breakpoints: 36em, 48em, 62em, 75em, 87.5em
+
+CONTAINER MAX-WIDTHS:
+- 36em+: 30.25rem (484px)
+- 48em+: 43rem (688px)
+- 62em+: 58rem (928px)
+- 75em+: 69.25rem (1108px)
+- 87.5em+: 74rem (1184px)
+
+===============================================================================
+END OF CONVERSATION
+===============================================================================

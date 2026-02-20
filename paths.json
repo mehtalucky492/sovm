@@ -1,10 +1,10 @@
 {
   "mappings": [
-    "/content/sovm-lekh/:/",
-    "/content/sovm-lekh/configuration:/.helix/config.json",
-    "/content/sovm-lekh/metadata:/metadata.json"
+    "/content/sovm1/:/",
+    "/content/sovm1/configuration:/.helix/config.json",
+    "/content/sovm1/metadata:/metadata.json"
   ],
   "includes": [
-    "/content/sovm-lekh/"
+    "/content/sovm1/"
   ]
 }
